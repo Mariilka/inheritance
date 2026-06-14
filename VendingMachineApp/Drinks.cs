@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace WindowsFormsApp1
+namespace VendingMachineApp
 {
     public class Drink
     {
@@ -15,21 +11,18 @@ namespace WindowsFormsApp1
             return $"Объём: {Volume} мл";
         }
     }
-    public enum JuiceFruit // фиксированный набор констат
-    {
-        Orange,
-        Apple,
-        Multifruit
-    }
+
+    public enum JuiceFruit { Orange, Apple, Multifruit }
+
     public class Juice : Drink
     {
-        public JuiceFruit FruitUsed;     // Используемый фрукт
-        public bool HasPulp;            // Наличие мякоти
+        public JuiceFruit FruitUsed;
+        public bool HasPulp;
 
         public override string GetInfo()
         {
             var str = "Я сок";
-            str += "\n" + base.GetInfo();  // добавляем информацию базового класса
+            str += "\n" + base.GetInfo();
             str += $"\nФрукт: {FruitUsed}";
             str += $"\nМякоть: {(HasPulp ? "есть" : "нет")}";
             return str;
@@ -39,24 +32,19 @@ namespace WindowsFormsApp1
         {
             return new Juice
             {
-                Volume = 200 + rnd.Next(300),                   // объём от 200 до 500 мл
-                FruitUsed = (JuiceFruit)rnd.Next(3),            // случайный фрукт
-                HasPulp = rnd.Next(2) == 0                      // мякоть true/false
+                Volume = 200 + rnd.Next(300),
+                FruitUsed = (JuiceFruit)rnd.Next(3),
+                HasPulp = rnd.Next(2) == 0
             };
         }
     }
 
-    public enum SodaType
-    {
-        Cola,
-        Lemonade,
-        Tonic
-    }
+    public enum SodaType { Cola, Lemonade, Tonic }
 
     public class Soda : Drink
     {
-        public SodaType Type;          // Вид (тип) газировки
-        public int BubbleCount;        // Количество пузырьков
+        public SodaType Type;
+        public int BubbleCount;
 
         public override string GetInfo()
         {
@@ -71,25 +59,19 @@ namespace WindowsFormsApp1
         {
             return new Soda
             {
-                Volume = 250 + rnd.Next(250),                  // объём от 250 до 500 мл
-                Type = (SodaType)rnd.Next(3),                  // случайный вид
-                BubbleCount = 500 + rnd.Next(1500)             // пузырьки от 500 до 2000
+                Volume = 250 + rnd.Next(250),
+                Type = (SodaType)rnd.Next(3),
+                BubbleCount = 500 + rnd.Next(1500)
             };
         }
     }
 
-    // Перечисление типов алкоголя
-    public enum AlcoholType
-    {
-        Beer,
-        Wine,
-        Vodka
-    }
+    public enum AlcoholType { Beer, Wine, Vodka }
 
     public class Alcohol : Drink
     {
-        public double Strength;        // Крепость в %
-        public AlcoholType Type;       // Тип алкоголя
+        public double Strength;
+        public AlcoholType Type;
 
         public override string GetInfo()
         {
@@ -104,9 +86,9 @@ namespace WindowsFormsApp1
         {
             return new Alcohol
             {
-                Volume = 40 + rnd.Next(460),                   // объём от 40 до 500 мл
-                Strength = Math.Round(3.0 + rnd.NextDouble() * 37.0, 1), // крепость от 3.0% до 40.0%
-                Type = (AlcoholType)rnd.Next(3)                // случайный тип
+                Volume = 40 + rnd.Next(460),
+                Strength = Math.Round(3.0 + rnd.NextDouble() * 37.0, 1),
+                Type = (AlcoholType)rnd.Next(3)
             };
         }
     }
